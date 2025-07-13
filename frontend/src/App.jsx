@@ -2,6 +2,7 @@ import React from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { Layout } from "./components/layout/Layout";
+import ProtectedRoute from "./components/auth/ProtectedRoute";
 
 import Home from "./pages/Home";
 import Jobs from "./pages/Jobs";
@@ -27,10 +28,38 @@ function App() {
           <Route path="/companies" element={<Companies />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/post-job" element={<PostJob />} />
-          <Route path="/dashboard/candidate" element={<DashboardCandidate />} />
-          <Route path="/dashboard/employer" element={<DashboardEmployer />} />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/post-job"
+            element={
+              <ProtectedRoute requiredRole="employer">
+                <PostJob />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/dashboard/candidate"
+            element={
+              <ProtectedRoute requiredRole="candidate">
+                <DashboardCandidate />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/dashboard/employer"
+            element={
+              <ProtectedRoute requiredRole="employer">
+                <DashboardEmployer />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </AnimatePresence>
     </Layout>

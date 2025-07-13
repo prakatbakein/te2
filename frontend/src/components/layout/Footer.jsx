@@ -37,7 +37,6 @@ const Footer = () => {
       links: [
         { name: "Post a Job", href: "/post-job" },
         { name: "Browse Candidates", href: "/candidates" },
-        { name: "Employer Dashboard", href: "/dashboard/employer" },
         { name: "Pricing", href: "/pricing" },
         { name: "Success Stories", href: "/success-stories" },
       ],
@@ -102,7 +101,7 @@ const Footer = () => {
                   <Briefcase className="w-6 h-6 text-white" />
                 </div>
                 <span className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-blue-300 bg-clip-text text-transparent">
-                  JobBoard
+                  Mentaurra
                 </span>
               </motion.div>
 
@@ -126,7 +125,7 @@ const Footer = () => {
               >
                 <div className="flex items-center space-x-3 text-gray-400">
                   <Mail className="w-4 h-4" />
-                  <span>hello@jobboard.com</span>
+                  <span>hello@mentaurra.com</span>
                 </div>
                 <div className="flex items-center space-x-3 text-gray-400">
                   <Phone className="w-4 h-4" />
@@ -232,7 +231,7 @@ const Footer = () => {
                 transition={{ duration: 0.6 }}
                 className="text-gray-400 text-sm flex items-center"
               >
-                © {currentYear} JobBoard. Made with{" "}
+                © {currentYear} Mentaurra. Made with{" "}
                 <Heart className="w-4 h-4 text-red-500 mx-1 fill-current" /> for
                 job seekers everywhere.
               </motion.p>
