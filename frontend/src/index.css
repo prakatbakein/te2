@@ -13,4 +13,109 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-g
+
+/* Professional Color Palette System */
+:root {
+  /* Light Theme (Nature Inspired) */
+  --bg-primary: #f0f8f6;
+  --bg-surface: #ffffff;
+  --text-primary: #2e8b57;
+  --text-secondary: #8fbc8f;
+  --accent: #ffd700;
+  --text-body: #374151;
+  --text-muted: #6b7280;
+}
+
+.dark {
+  color-scheme: dark;
+  /* Dark Theme (Charcoal Minimal) */
+  --bg-primary: #181818;
+  --bg-surface: #202020;
+  --text-primary: #e0e0e0;
+  --text-secondary: #a0a0a0;
+  --accent: #ff6b6b;
+  --text-body: #e5e7eb;
+  --text-muted: #9ca3af;
+}
+
+/* Global Background */
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-body);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Professional Button Styles */
+.btn-primary {
+  background-color: var(--text-primary);
+  color: var(--bg-surface);
+  border: 2px solid var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--text-secondary);
+  border-color: var(--text-secondary);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--text-primary);
+  border: 2px solid var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background-color: var(--text-primary);
+  color: var(--bg-surface);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Professional Gradient Backgrounds */
+.bg-gradient-professional {
+  background: linear-gradient(
+    135deg,
+    var(--bg-primary) 0%,
+    var(--bg-surface) 100%
+  );
+}
+
+.dark .bg-gradient-professional {
+  background: linear-gradient(135deg, #181818 0%, #202020 50%, #181818 100%);
+}
+
+/* Enhanced Input Styles */
+.input-professional {
+  background-color: var(--bg-surface);
+  border: 2px solid var(--text-secondary);
+  color: var(--text-body);
+  transition: all 0.3s ease;
+}
+
+.input-professional:focus {
+  border-color: var(--text-primary);
+  box-shadow: 0 0 0 3px rgba(46, 139, 87, 0.1);
+}
+
+.dark .input-professional:focus {
+  box-shadow: 0 0 0 3px rgba(224, 224, 224, 0.1);
+}
+
+/* Card Surfaces */
+.surface-card {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--text-secondary);
+  transition: all 0.3s ease;
+}
+
+.surface-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+}
+
+.dark .surface-card:hover {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}

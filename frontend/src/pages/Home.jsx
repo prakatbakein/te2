@@ -190,25 +190,33 @@ const Home = () => {
     <div className="min-h-screen overflow-hidden">
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden">
-        {/* Animated Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-gray-900 dark:via-blue-900/20 dark:to-purple-900/20" />
+        {/* Professional Background */}
+        <div className="absolute inset-0 bg-gradient-professional" />
 
-        {/* Floating Elements */}
+        {/* Subtle Floating Elements */}
         <motion.div
           style={{ y: y1 }}
-          className="absolute top-20 left-10 w-20 h-20 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full opacity-20 blur-xl"
+          className="absolute top-20 left-10 w-20 h-20 rounded-full opacity-10"
+          animate={{
+            background: [
+              "var(--text-secondary)",
+              "var(--accent)",
+              "var(--text-secondary)",
+            ],
+          }}
+          transition={{ duration: 6, repeat: Infinity }}
         />
         <motion.div
           style={{ y: y2 }}
-          className="absolute bottom-20 right-10 w-32 h-32 bg-gradient-to-r from-pink-400 to-orange-500 rounded-full opacity-20 blur-xl"
-        />
-
-        {/* Background Image */}
-        <div
-          className="absolute inset-0 opacity-10 bg-cover bg-center"
-          style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1544037119-50b88b582067?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzV8MHwxfHNlYXJjaHwzfHxhYnN0cmFjdCUyMGNhcmVlcnxlbnwwfHx8Ymx1ZXwxNzUyNDAxMTQzfDA&ixlib=rb-4.1.0&q=85')`,
+          className="absolute bottom-20 right-10 w-32 h-32 rounded-full opacity-10"
+          animate={{
+            background: [
+              "var(--accent)",
+              "var(--text-secondary)",
+              "var(--accent)",
+            ],
           }}
+          transition={{ duration: 8, repeat: Infinity }}
         />
 
         <div className="relative max-w-7xl mx-auto text-center z-10">
@@ -218,36 +226,46 @@ const Home = () => {
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
             <motion.div
-              className="inline-flex items-center space-x-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl px-4 py-2 rounded-full border border-gray-200/50 dark:border-gray-700/50 mb-8"
+              className="inline-flex items-center space-x-2 surface-card backdrop-blur-xl px-4 py-2 rounded-full mb-8"
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
             >
-              <Sparkles className="w-4 h-4 text-purple-600" />
-              <span className="text-sm font-medium bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              <Sparkles
+                className="w-4 h-4"
+                style={{ color: "var(--accent)" }}
+              />
+              <span
+                className="text-sm font-medium"
+                style={{ color: "var(--text-primary)" }}
+              >
                 AI-Powered Career Matching
               </span>
             </motion.div>
 
-            <h1 className="text-5xl md:text-7xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
+            <h1
+              className="text-5xl md:text-7xl font-bold mb-6 leading-tight"
+              style={{ color: "var(--text-primary)" }}
+            >
               Your Dream Career
               <br />
-              <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-                Starts Here
-              </span>
+              Starts Here
             </h1>
 
-            <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-10 max-w-4xl mx-auto leading-relaxed">
+            <p
+              className="text-xl md:text-2xl mb-10 max-w-4xl mx-auto leading-relaxed"
+              style={{ color: "var(--text-muted)" }}
+            >
               Join the future of job searching with Mentaurra's intelligent
               platform. Connect with top companies, unlock hidden opportunities,
               and accelerate your career like never before.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-6 justify-center mb-16">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
               <Button
                 size="lg"
                 onClick={() => navigate("/signup")}
-                className="text-lg px-8 py-4 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 hover:from-blue-700 hover:via-purple-700 hover:to-pink-700 shadow-2xl shadow-purple-500/25 transition-all duration-300 hover:scale-105"
+                className="btn-primary text-lg px-8 py-4 rounded-xl font-semibold min-h-[56px] flex items-center justify-center"
               >
                 <Rocket className="w-5 h-5 mr-2" />
                 Start Your Journey
@@ -256,22 +274,22 @@ const Home = () => {
                 variant="outline"
                 size="lg"
                 onClick={() => navigate("/jobs")}
-                className="text-lg px-8 py-4 border-2 backdrop-blur-xl bg-white/10 hover:bg-white/20 transition-all duration-300 hover:scale-105"
+                className="btn-secondary text-lg px-8 py-4 rounded-xl font-semibold min-h-[56px] flex items-center justify-center"
               >
                 <Play className="w-5 h-5 mr-2" />
                 Explore Opportunities
               </Button>
             </div>
 
-            {/* Quick Search */}
+            {/* Enhanced Search Section */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
               className="max-w-3xl mx-auto"
             >
-              <Card className="backdrop-blur-xl bg-white/80 dark:bg-gray-800/80 border-gray-200/50 dark:border-gray-700/50 shadow-2xl">
-                <CardContent className="p-6">
+              <div className="surface-card backdrop-blur-xl rounded-2xl shadow-xl">
+                <div className="p-6">
                   <form
                     onSubmit={(e) => {
                       e.preventDefault();
@@ -290,7 +308,7 @@ const Home = () => {
                           type="text"
                           name="search"
                           placeholder="Job title, skills, or company"
-                          className="w-full px-6 py-4 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all text-lg"
+                          className="input-professional w-full px-6 py-4 rounded-xl focus:outline-none text-lg"
                         />
                       </div>
                       <div className="flex-1">
@@ -298,19 +316,19 @@ const Home = () => {
                           type="text"
                           name="location"
                           placeholder="Location or Remote"
-                          className="w-full px-6 py-4 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all text-lg"
+                          className="input-professional w-full px-6 py-4 rounded-xl focus:outline-none text-lg"
                         />
                       </div>
                       <Button
                         type="submit"
-                        className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition-all duration-300 hover:scale-105"
+                        className="btn-primary px-8 py-4 rounded-xl min-h-[56px] flex items-center justify-center"
                       >
                         <Search className="w-5 h-5" />
                       </Button>
                     </div>
                   </form>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
             </motion.div>
           </motion.div>
         </div>
@@ -321,12 +339,15 @@ const Home = () => {
           transition={{ repeat: Infinity, duration: 2 }}
           className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
         >
-          <ChevronDown className="w-6 h-6 text-gray-400" />
+          <ChevronDown
+            className="w-6 h-6"
+            style={{ color: "var(--text-secondary)" }}
+          />
         </motion.div>
       </section>
 
       {/* Stats Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-blue-50 via-purple-50 to-pink-50 dark:from-gray-900 dark:via-blue-900/10 dark:to-purple-900/10">
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-professional">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat, index) => {
@@ -341,14 +362,24 @@ const Home = () => {
                   className="text-center group"
                 >
                   <div
-                    className={`w-16 h-16 mx-auto mb-4 bg-gradient-to-r ${stat.color} rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}
+                    className="w-16 h-16 mx-auto mb-4 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300"
+                    style={{ backgroundColor: "var(--text-primary)" }}
                   >
-                    <Icon className="w-8 h-8 text-white" />
+                    <Icon
+                      className="w-8 h-8"
+                      style={{ color: "var(--bg-surface)" }}
+                    />
                   </div>
-                  <div className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-2">
+                  <div
+                    className="text-4xl md:text-5xl font-bold mb-2"
+                    style={{ color: "var(--text-primary)" }}
+                  >
                     {stat.number}
                   </div>
-                  <div className="text-gray-600 dark:text-gray-400 font-medium">
+                  <div
+                    className="font-medium"
+                    style={{ color: "var(--text-secondary)" }}
+                  >
                     {stat.label}
                   </div>
                 </motion.div>

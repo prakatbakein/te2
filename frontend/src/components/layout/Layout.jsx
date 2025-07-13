@@ -7,7 +7,7 @@ import { ThemeProvider } from "../ui/ThemeProvider";
 const Layout = ({ children }) => {
   return (
     <ThemeProvider>
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 transition-colors duration-300">
+      <div className="min-h-screen bg-gradient-professional transition-colors duration-300">
         <Navigation />
         <motion.main
           className="pt-16"

@@ -12,16 +12,17 @@ export const useTheme = () => {
 
 export const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState(() => {
-    // Check localStorage first, then system preference
+    // Check localStorage first, then default to dark theme
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme) return savedTheme;
 
-    return window.matchMedia("(prefers-color-scheme: dark)").matches
-      ? "dark"
-      : "light";
+    // Default to dark theme as per requirements
+    return "dark";
   });
 
+  // Initial theme application
   useEffect(() => {
+    // Apply theme immediately on mount
     localStorage.setItem("theme", theme);
     if (theme === "dark") {
       document.documentElement.classList.add("dark");
@@ -29,6 +30,14 @@ export const ThemeProvider = ({ children }) => {
       document.documentElement.classList.remove("dark");
     }
   }, [theme]);
+
+  // Force dark theme on first load if no saved theme
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme");
+    if (!savedTheme) {
+      setTheme("dark");
+    }
+  }, []);
 
   const toggleTheme = () => {
     setTheme((prev) => (prev === "light" ? "dark" : "light"));
