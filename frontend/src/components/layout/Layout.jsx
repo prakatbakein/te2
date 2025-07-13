@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Navigation } from "./Navigation";
+import { Footer } from "./Footer";
 import { ThemeProvider } from "../ui/ThemeProvider";
 
 const Layout = ({ children }) => {
@@ -16,6 +17,7 @@ const Layout = ({ children }) => {
         >
           {children}
         </motion.main>
+        <Footer />
       </div>
     </ThemeProvider>
   );
