@@ -6,6 +6,8 @@ import React, {
   useCallback,
 } from "react";
 import axios from "axios";
+import { auth, signInWithGoogle, signOutUser } from "../services/firebase";
+import { onAuthStateChanged } from "firebase/auth";
 
 // Create AuthContext
 const AuthContext = createContext();
@@ -64,11 +66,20 @@ export const AuthProvider = ({ children }) => {
       setLoading(false);
     }
 
-    // Cleanup interceptor
+    // Firebase Auth State Listener
+    const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
+      if (firebaseUser && !user) {
+        // User signed in with Firebase but not authenticated with our backend
+        console.log("Firebase user detected:", firebaseUser);
+      }
+    });
+
+    // Cleanup interceptor and listener
     return () => {
       axios.interceptors.request.eject(interceptor);
+      unsubscribe();
     };
-  }, [token, checkAuthStatus]);
+  }, [token, checkAuthStatus, user]);
 
   const login = async (email, password) => {
     try {
@@ -118,10 +129,53 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const logout = () => {
-    localStorage.removeItem("token");
-    setToken(null);
-    setUser(null);
+  const signInWithGoogleAuth = async (role = "candidate") => {
+    try {
+      // Sign in with Google Firebase
+      const result = await signInWithGoogle();
+      const firebaseUser = result.user;
+
+      // Get Firebase ID token
+      const idToken = await firebaseUser.getIdToken();
+
+      // Send token to backend for authentication
+      const response = await axios.post(
+        `${API_BASE_URL}/api/auth/firebase-auth`,
+        {
+          firebase_token: idToken,
+          role: role,
+        }
+      );
+
+      const { access_token, ...userData } = response.data;
+
+      if (access_token) {
+        localStorage.setItem("token", access_token);
+        setToken(access_token);
+        setUser(userData);
+        return { success: true, user: userData };
+      }
+    } catch (error) {
+      console.error("Google sign in failed:", error);
+      return {
+        success: false,
+        error: error.response?.data?.detail || "Google sign in failed",
+      };
+    }
+  };
+
+  const logout = async () => {
+    try {
+      // Sign out from Firebase
+      await signOutUser();
+    } catch (error) {
+      console.error("Firebase sign out error:", error);
+    } finally {
+      // Clear local storage and state
+      localStorage.removeItem("token");
+      setToken(null);
+      setUser(null);
+    }
   };
 
   const value = {
@@ -129,6 +183,7 @@ export const AuthProvider = ({ children }) => {
     loading,
     login,
     signup,
+    signInWithGoogleAuth,
     logout,
     isAuthenticated: !!user,
   };

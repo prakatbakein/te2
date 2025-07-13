@@ -19,6 +19,7 @@ import {
   EyeOff,
   Users,
 } from "lucide-react";
+import GoogleSignInButton from "../components/auth/GoogleSignInButton";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -32,6 +33,7 @@ const Signup = () => {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [selectedRole, setSelectedRole] = useState("candidate");
 
   const { signup } = useAuth();
   const navigate = useNavigate();
@@ -42,6 +44,15 @@ const Signup = () => {
       [e.target.name]: e.target.value,
     });
     if (error) setError(""); // Clear error when user starts typing
+  };
+
+  const handleRoleChange = (e) => {
+    const role = e.target.value;
+    setSelectedRole(role);
+    setFormData({
+      ...formData,
+      role: role,
+    });
   };
 
   const validateForm = () => {
@@ -101,6 +112,19 @@ const Signup = () => {
     }
   };
 
+  const handleGoogleSuccess = (result) => {
+    // Redirect based on user role
+    if (result.user.role === "employer") {
+      navigate("/dashboard/employer");
+    } else {
+      navigate("/dashboard/candidate");
+    }
+  };
+
+  const handleGoogleError = (error) => {
+    setError(error);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center p-6">
       <motion.div
@@ -130,6 +154,81 @@ const Signup = () => {
                 <span className="text-sm">{error}</span>
               </motion.div>
             )}
+
+            {/* Role Selection for Google OAuth */}
+            <div className="mb-6">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                I am a:
+              </label>
+              <div className="grid grid-cols-2 gap-3 mb-4">
+                <motion.label
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className={`relative p-3 rounded-xl border-2 cursor-pointer transition-all ${
+                    selectedRole === "candidate"
+                      ? "border-blue-500 bg-blue-50 dark:bg-blue-900/20"
+                      : "border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600"
+                  }`}
+                >
+                  <input
+                    type="radio"
+                    name="role"
+                    value="candidate"
+                    checked={selectedRole === "candidate"}
+                    onChange={handleRoleChange}
+                    className="sr-only"
+                  />
+                  <div className="flex flex-col items-center space-y-1">
+                    <User className="w-5 h-5 text-gray-600 dark:text-gray-400" />
+                    <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                      Job Seeker
+                    </span>
+                  </div>
+                </motion.label>
+
+                <motion.label
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className={`relative p-3 rounded-xl border-2 cursor-pointer transition-all ${
+                    selectedRole === "employer"
+                      ? "border-blue-500 bg-blue-50 dark:bg-blue-900/20"
+                      : "border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600"
+                  }`}
+                >
+                  <input
+                    type="radio"
+                    name="role"
+                    value="employer"
+                    checked={selectedRole === "employer"}
+                    onChange={handleRoleChange}
+                    className="sr-only"
+                  />
+                  <div className="flex flex-col items-center space-y-1">
+                    <Users className="w-5 h-5 text-gray-600 dark:text-gray-400" />
+                    <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                      Employer
+                    </span>
+                  </div>
+                </motion.label>
+              </div>
+
+              <GoogleSignInButton
+                role={selectedRole}
+                onSuccess={handleGoogleSuccess}
+                onError={handleGoogleError}
+              />
+            </div>
+
+            <div className="relative mb-6">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-gray-300 dark:border-gray-600"></div>
+              </div>
+              <div className="relative flex justify-center text-sm">
+                <span className="px-2 bg-white dark:bg-gray-900 text-gray-500">
+                  Or continue with email
+                </span>
+              </div>
+            </div>
 
             <form onSubmit={handleSubmit} className="space-y-6">
               <Input
@@ -200,64 +299,6 @@ const Signup = () => {
                     <Eye className="w-4 h-4" />
                   )}
                 </button>
-              </div>
-
-              {/* Role Selection */}
-              <div className="space-y-2">
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                  I am a:
-                </label>
-                <div className="grid grid-cols-2 gap-3">
-                  <motion.label
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className={`relative p-4 rounded-xl border-2 cursor-pointer transition-all ${
-                      formData.role === "candidate"
-                        ? "border-blue-500 bg-blue-50 dark:bg-blue-900/20"
-                        : "border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600"
-                    }`}
-                  >
-                    <input
-                      type="radio"
-                      name="role"
-                      value="candidate"
-                      checked={formData.role === "candidate"}
-                      onChange={handleChange}
-                      className="sr-only"
-                    />
-                    <div className="flex flex-col items-center space-y-2">
-                      <User className="w-6 h-6 text-gray-600 dark:text-gray-400" />
-                      <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                        Job Seeker
-                      </span>
-                    </div>
-                  </motion.label>
-
-                  <motion.label
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className={`relative p-4 rounded-xl border-2 cursor-pointer transition-all ${
-                      formData.role === "employer"
-                        ? "border-blue-500 bg-blue-50 dark:bg-blue-900/20"
-                        : "border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600"
-                    }`}
-                  >
-                    <input
-                      type="radio"
-                      name="role"
-                      value="employer"
-                      checked={formData.role === "employer"}
-                      onChange={handleChange}
-                      className="sr-only"
-                    />
-                    <div className="flex flex-col items-center space-y-2">
-                      <Users className="w-6 h-6 text-gray-600 dark:text-gray-400" />
-                      <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                        Employer
-                      </span>
-                    </div>
-                  </motion.label>
-                </div>
               </div>
 
               <Button

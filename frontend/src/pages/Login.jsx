@@ -11,6 +11,7 @@ import {
 import { Button } from "../components/ui/Button";
 import { Input } from "../components/ui/Input";
 import { Mail, Lock, AlertCircle, Eye, EyeOff } from "lucide-react";
+import GoogleSignInButton from "../components/auth/GoogleSignInButton";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -57,6 +58,19 @@ const Login = () => {
     }
   };
 
+  const handleGoogleSuccess = (result) => {
+    // Redirect based on user role
+    if (result.user.role === "employer") {
+      navigate("/dashboard/employer");
+    } else {
+      navigate("/dashboard/candidate");
+    }
+  };
+
+  const handleGoogleError = (error) => {
+    setError(error);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center p-6">
       <motion.div
@@ -86,6 +100,26 @@ const Login = () => {
                 <span className="text-sm">{error}</span>
               </motion.div>
             )}
+
+            {/* Google Sign In Button */}
+            <div className="mb-6">
+              <GoogleSignInButton
+                role="candidate"
+                onSuccess={handleGoogleSuccess}
+                onError={handleGoogleError}
+              />
+            </div>
+
+            <div className="relative mb-6">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-gray-300 dark:border-gray-600"></div>
+              </div>
+              <div className="relative flex justify-center text-sm">
+                <span className="px-2 bg-white dark:bg-gray-900 text-gray-500">
+                  Or continue with email
+                </span>
+              </div>
+            </div>
 
             <form onSubmit={handleSubmit} className="space-y-6">
               <Input
