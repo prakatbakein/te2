@@ -17,11 +17,11 @@ const Button = React.forwardRef(
     const variants = {
       default: cn(
         // Base styles
-        "bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg",
+        "bg-gray-900 text-white shadow-lg",
         // Hover effects
-        "hover:from-blue-700 hover:to-blue-800 hover:shadow-xl hover:shadow-blue-500/25",
+        "hover:bg-gray-800 hover:shadow-xl",
         // Dark mode
-        "dark:from-blue-500 dark:to-blue-600 dark:hover:from-blue-600 dark:hover:to-blue-700",
+        "dark:bg-gray-100 dark:text-gray-900 dark:hover:bg-gray-200",
         // Active state
         "active:scale-95"
       ),
@@ -41,10 +41,10 @@ const Button = React.forwardRef(
         "text-gray-600 hover:bg-gray-100 hover:text-gray-900",
         "dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"
       ),
-      link: "text-blue-600 underline-offset-4 hover:underline dark:text-blue-400",
+      link: "text-gray-600 underline-offset-4 hover:underline dark:text-gray-400",
       destructive: cn(
-        "bg-gradient-to-r from-red-500 to-red-600 text-white shadow-lg",
-        "hover:from-red-600 hover:to-red-700 hover:shadow-xl hover:shadow-red-500/25"
+        "bg-red-600 text-white shadow-lg",
+        "hover:bg-red-700 hover:shadow-xl"
       ),
     };
 
@@ -61,7 +61,7 @@ const Button = React.forwardRef(
         className={cn(
           // Base styles
           "inline-flex items-center justify-center rounded-xl font-medium transition-all duration-200",
-          "focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2",
+          "focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2",
           "dark:focus:ring-offset-gray-900",
           // Disabled state
           "disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100",

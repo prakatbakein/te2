@@ -46,7 +46,7 @@ const Home = () => {
       title: "AI-Powered Matching",
       description:
         "Our advanced AI analyzes your skills and preferences to find perfect job matches instantly.",
-      color: "from-yellow-500 via-orange-500 to-red-500",
+      color: "from-gray-500 via-gray-600 to-gray-700",
       image:
         "https://images.unsplash.com/photo-1660165458059-57cfb6cc87e5?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzF8MHwxfHNlYXJjaHwxfHxmdXR1cmlzdGljJTIwdGVjaG5vbG9neXxlbnwwfHx8Ymx1ZXwxNzUyMzA3MjExfDA&ixlib=rb-4.1.0&q=85",
     },
@@ -55,7 +55,7 @@ const Home = () => {
       title: "Global Opportunities",
       description:
         "Access jobs from companies worldwide with remote-friendly positions and international careers.",
-      color: "from-green-500 via-teal-500 to-blue-500",
+      color: "from-gray-600 via-gray-700 to-gray-800",
       image:
         "https://images.unsplash.com/photo-1558845759-66c12fb98a1b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzV8MHwxfHNlYXJjaHwyfHxidXNpbmVzcyUyMGdyb3d0aHxlbnwwfHx8cHVycGxlfDE3NTI0MDEyMDR8MA&ixlib=rb-4.1.0&q=85",
     },
@@ -64,7 +64,7 @@ const Home = () => {
       title: "Verified Companies",
       description:
         "Every company on our platform is thoroughly vetted to ensure legitimate and quality opportunities.",
-      color: "from-purple-500 via-pink-500 to-indigo-500",
+      color: "from-gray-700 via-gray-800 to-gray-900",
       image:
         "https://images.pexels.com/photos/8728284/pexels-photo-8728284.jpeg",
     },
@@ -73,7 +73,7 @@ const Home = () => {
       title: "Career Acceleration",
       description:
         "Fast-track your career with personalized insights, skill recommendations, and growth tracking.",
-      color: "from-blue-500 via-indigo-500 to-purple-500",
+      color: "from-gray-800 via-gray-900 to-black",
       image:
         "https://images.unsplash.com/photo-1566598359998-62e83aeea166?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzR8MHwxfHNlYXJjaHwxfHx3b3Jrc3BhY2V8ZW58MHx8fHB1cnBsZXwxNzUyNDAxMjEyfDA&ixlib=rb-4.1.0&q=85",
     },
@@ -84,25 +84,25 @@ const Home = () => {
       number: "25K+",
       label: "Active Jobs",
       icon: Briefcase,
-      color: "from-blue-500 to-cyan-500",
+      color: "from-gray-500 to-gray-600",
     },
     {
       number: "8K+",
       label: "Top Companies",
       icon: Building,
-      color: "from-purple-500 to-pink-500",
+      color: "from-gray-600 to-gray-700",
     },
     {
       number: "120K+",
       label: "Professionals",
       icon: Users,
-      color: "from-green-500 to-emerald-500",
+      color: "from-gray-700 to-gray-800",
     },
     {
       number: "98%",
       label: "Success Rate",
       icon: Award,
-      color: "from-orange-500 to-red-500",
+      color: "from-gray-800 to-gray-900",
     },
   ];
 
@@ -401,7 +401,7 @@ const Home = () => {
           >
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
               How{" "}
-              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              <span className="text-gray-800 dark:text-gray-100">
                 Mentaurra
               </span>{" "}
               Works
@@ -429,7 +429,7 @@ const Home = () => {
                       <div className="text-6xl font-bold text-gray-100 dark:text-gray-800 absolute -top-4 -left-2">
                         {step.step}
                       </div>
-                      <div className="relative z-10 w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg">
+                      <div className="relative z-10 w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-gray-700 to-gray-800 rounded-2xl flex items-center justify-center shadow-lg">
                         <Icon className="w-8 h-8 text-white" />
                       </div>
                     </div>
@@ -445,7 +445,7 @@ const Home = () => {
 
                   {/* Connection Line */}
                   {index < howItWorks.length - 1 && (
-                    <div className="hidden lg:block absolute top-1/2 -right-4 w-8 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 z-20"></div>
+                    <div className="hidden lg:block absolute top-1/2 -right-4 w-8 h-0.5 bg-gradient-to-r from-gray-400 to-gray-600 z-20"></div>
                   )}
                 </motion.div>
               );
@@ -455,7 +455,7 @@ const Home = () => {
       </section>
 
       {/* Features Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-blue-900/20">
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -466,7 +466,7 @@ const Home = () => {
           >
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
               Why Choose{" "}
-              <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+              <span className="text-gray-800 dark:text-gray-100">
                 Mentaurra
               </span>
               ?
@@ -533,9 +533,7 @@ const Home = () => {
           >
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
               Success{" "}
-              <span className="bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
-                Stories
-              </span>
+              <span className="text-gray-800 dark:text-gray-100">Stories</span>
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
               Join thousands of professionals who transformed their careers with
@@ -595,7 +593,7 @@ const Home = () => {
                   onClick={() => setCurrentTestimonial(index)}
                   className={`w-3 h-3 rounded-full transition-all duration-300 ${
                     index === currentTestimonial
-                      ? "bg-gradient-to-r from-blue-600 to-purple-600 scale-125"
+                      ? "bg-gradient-to-r from-gray-700 to-gray-800 scale-125"
                       : "bg-gray-300 dark:bg-gray-600 hover:bg-gray-400"
                   }`}
                 />
@@ -606,7 +604,7 @@ const Home = () => {
       </section>
 
       {/* Companies Section */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/10 dark:to-pink-900/10">
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
         <div className="max-w-7xl mx-auto text-center">
           <h3 className="text-2xl font-semibold text-gray-600 dark:text-gray-400 mb-8">
             Trusted by leading companies worldwide
@@ -629,7 +627,7 @@ const Home = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 relative overflow-hidden">
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gray-800 to-gray-900 relative overflow-hidden">
         <div className="absolute inset-0 bg-black/20" />
         <div className="relative max-w-4xl mx-auto text-center">
           <motion.div

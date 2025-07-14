@@ -72,7 +72,7 @@ const Navigation = () => {
       transition={{ type: "spring", stiffness: 300, damping: 30 }}
     >
       {/* Glass effect overlay for enhanced transparency */}
-      <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-purple-500/5 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-r from-gray-500/5 to-gray-700/5 pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
@@ -82,10 +82,10 @@ const Navigation = () => {
             whileHover={{ scale: 1.05 }}
           >
             <Link to="/" className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg flex items-center justify-center shadow-lg">
-                <Briefcase className="w-5 h-5 text-white" />
+              <div className="w-8 h-8 bg-gradient-to-r from-gray-800 to-gray-900 dark:from-gray-100 dark:to-gray-200 rounded-lg flex items-center justify-center shadow-lg">
+                <Briefcase className="w-5 h-5 text-white dark:text-gray-800" />
               </div>
-              <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent">
+              <span className="text-xl font-bold text-gray-800 dark:text-gray-100">
                 Mentaurra
               </span>
             </Link>
@@ -106,7 +106,7 @@ const Navigation = () => {
                     to={item.href}
                     className={`flex items-center space-x-2 px-4 py-2 rounded-xl transition-all duration-300 ${
                       isActive
-                        ? "text-blue-600 bg-blue-50/80 dark:bg-blue-900/30 dark:text-blue-400 shadow-sm"
+                        ? "text-gray-800 dark:text-gray-100 bg-gray-100 dark:bg-gray-800 shadow-sm"
                         : "text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white hover:bg-gray-50/60 dark:hover:bg-gray-800/60"
                     }`}
                   >
@@ -129,8 +129,8 @@ const Navigation = () => {
                   className="flex items-center space-x-2 p-2 rounded-xl hover:bg-gray-100/60 dark:hover:bg-gray-800/60 transition-all duration-300"
                   whileHover={{ scale: 1.05 }}
                 >
-                  <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-blue-700 rounded-full flex items-center justify-center shadow-lg">
-                    <User className="w-4 h-4 text-white" />
+                  <div className="w-8 h-8 bg-gradient-to-r from-gray-800 to-gray-900 dark:from-gray-100 dark:to-gray-200 rounded-full flex items-center justify-center shadow-lg">
+                    <User className="w-4 h-4 text-white dark:text-gray-800" />
                   </div>
                   <span className="hidden sm:block text-sm font-medium text-gray-700 dark:text-gray-300">
                     {user?.full_name}
@@ -182,7 +182,7 @@ const Navigation = () => {
                 </Button>
                 <Button
                   onClick={() => navigate("/signup")}
-                  className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 shadow-lg"
+                  className="bg-gray-800 hover:bg-gray-900 dark:bg-gray-100 dark:hover:bg-gray-200 dark:text-gray-800 shadow-lg"
                 >
                   Sign Up
                 </Button>
@@ -224,7 +224,7 @@ const Navigation = () => {
                       to={item.href}
                       className={`flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-300 ${
                         isActive
-                          ? "text-blue-600 bg-blue-50/80 dark:bg-blue-900/30 dark:text-blue-400"
+                          ? "text-gray-800 dark:text-gray-100 bg-gray-100 dark:bg-gray-800"
                           : "text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white hover:bg-gray-50/60 dark:hover:bg-gray-800/60"
                       }`}
                       onClick={() => setIsMenuOpen(false)}

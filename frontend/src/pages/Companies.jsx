@@ -9,6 +9,7 @@ import {
 } from "../components/ui/Card";
 import { Button } from "../components/ui/Button";
 import { Input } from "../components/ui/Input";
+import { fetchRealCompanies } from "../services/jobApi";
 import {
   Search,
   Building,
@@ -128,14 +129,21 @@ const Companies = () => {
   ];
 
   useEffect(() => {
-    // Simulate API call
+    // Load real companies data
     const loadCompanies = async () => {
       setLoading(true);
-      setTimeout(() => {
+      try {
+        const realCompanies = await fetchRealCompanies();
+        setCompanies(realCompanies);
+        setFilteredCompanies(realCompanies);
+      } catch (error) {
+        console.error("Failed to fetch companies:", error);
+        // Fallback to mock data
         setCompanies(mockCompanies);
         setFilteredCompanies(mockCompanies);
+      } finally {
         setLoading(false);
-      }, 1000);
+      }
     };
 
     loadCompanies();
@@ -189,7 +197,7 @@ const Companies = () => {
         <CardHeader className="pb-4">
           <div className="flex items-start justify-between">
             <div className="flex items-center space-x-4">
-              <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center">
+              <div className="w-12 h-12 bg-gradient-to-r from-gray-700 to-gray-800 rounded-xl flex items-center justify-center">
                 <span className="text-white font-bold text-lg">
                   {company.logo}
                 </span>
@@ -230,9 +238,9 @@ const Companies = () => {
 
           <div className="flex items-center justify-between pt-4 border-t border-gray-200 dark:border-gray-700">
             <div className="flex items-center space-x-2">
-              <Briefcase className="w-4 h-4 text-blue-600 dark:text-blue-400" />
-              <span className="text-sm font-medium text-blue-600 dark:text-blue-400">
-                {company.openJobs} open positions
+              <Briefcase className="w-4 h-4 text-gray-600 dark:text-gray-400" />
+              <span className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                {company.openJobs || company.jobs_count} open positions
               </span>
             </div>
             <Button
@@ -301,7 +309,7 @@ const Companies = () => {
                 <select
                   value={industryFilter}
                   onChange={(e) => setIndustryFilter(e.target.value)}
-                  className="p-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="p-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-gray-500"
                 >
                   {industries.map((industry) => (
                     <option
@@ -337,7 +345,7 @@ const Companies = () => {
               <span className="text-sm text-gray-500 dark:text-gray-400">
                 Sort by:
               </span>
-              <select className="p-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+              <select className="p-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-gray-500">
                 <option>Company Name</option>
                 <option>Rating: High to Low</option>
                 <option>Open Jobs</option>
@@ -353,7 +361,7 @@ const Companies = () => {
             <motion.div
               animate={{ rotate: 360 }}
               transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-              className="w-8 h-8 border-2 border-blue-600 border-t-transparent rounded-full"
+              className="w-8 h-8 border-2 border-gray-600 border-t-transparent rounded-full"
             />
           </div>
         ) : (
@@ -397,7 +405,7 @@ const Companies = () => {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="mt-16 text-center"
           >
-            <Card className="p-8 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20">
+            <Card className="p-8 bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
               <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
                 Ready to Find Your Dream Job?
               </h3>

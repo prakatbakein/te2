@@ -14,28 +14,32 @@ code {
     monospace;
 }
 
-/* Professional Color Palette System */
+/* Professional Monochrome Color Palette System */
 :root {
-  /* Light Theme (Nature Inspired) */
-  --bg-primary: #f0f8f6;
-  --bg-surface: #ffffff;
-  --text-primary: #2e8b57;
-  --text-secondary: #8fbc8f;
-  --accent: #ffd700;
-  --text-body: #374151;
-  --text-muted: #6b7280;
+  /* Light Theme (Clean White) */
+  --bg-primary: #ffffff;
+  --bg-surface: #f8f9fa;
+  --text-primary: #000000;
+  --text-secondary: #6c757d;
+  --accent: #343a40;
+  --text-body: #212529;
+  --text-muted: #6c757d;
+  --border-color: #e9ecef;
+  --shadow-light: rgba(0, 0, 0, 0.1);
 }
 
 .dark {
   color-scheme: dark;
-  /* Dark Theme (Charcoal Minimal) */
-  --bg-primary: #181818;
-  --bg-surface: #202020;
-  --text-primary: #e0e0e0;
-  --text-secondary: #a0a0a0;
-  --accent: #ff6b6b;
-  --text-body: #e5e7eb;
-  --text-muted: #9ca3af;
+  /* Dark Theme (Professional Dark) */
+  --bg-primary: #121212;
+  --bg-surface: #1e1e1e;
+  --text-primary: #ffffff;
+  --text-secondary: #a8a8a8;
+  --accent: #f5f5f5;
+  --text-body: #e0e0e0;
+  --text-muted: #9e9e9e;
+  --border-color: #333333;
+  --shadow-light: rgba(255, 255, 255, 0.1);
 }
 
 /* Global Background */
@@ -84,7 +88,7 @@ body {
 }
 
 .dark .bg-gradient-professional {
-  background: linear-gradient(135deg, #181818 0%, #202020 50%, #181818 100%);
+  background: linear-gradient(135deg, #121212 0%, #1e1e1e 50%, #121212 100%);
 }
 
 /* Enhanced Input Styles */
@@ -97,25 +101,70 @@ body {
 
 .input-professional:focus {
   border-color: var(--text-primary);
-  box-shadow: 0 0 0 3px rgba(46, 139, 87, 0.1);
+  box-shadow: 0 0 0 3px var(--shadow-light);
 }
 
 .dark .input-professional:focus {
-  box-shadow: 0 0 0 3px rgba(224, 224, 224, 0.1);
+  box-shadow: 0 0 0 3px var(--shadow-light);
 }
 
 /* Card Surfaces */
 .surface-card {
   background-color: var(--bg-surface);
-  border: 1px solid var(--text-secondary);
+  border: 1px solid var(--border-color);
   transition: all 0.3s ease;
 }
 
 .surface-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 12px 40px var(--shadow-light);
 }
 
 .dark .surface-card:hover {
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 12px 40px var(--shadow-light);
+}
+
+/* Startup MVP Specific Styles */
+.startup-card {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 24px;
+  transition: all 0.3s ease;
+}
+
+.startup-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px var(--shadow-light);
+}
+
+.startup-button {
+  background-color: var(--text-primary);
+  color: var(--bg-primary);
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.startup-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px var(--shadow-light);
+}
+
+.startup-button-outline {
+  background-color: transparent;
+  color: var(--text-primary);
+  border: 2px solid var(--text-primary);
+  padding: 10px 22px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.startup-button-outline:hover {
+  background-color: var(--text-primary);
+  color: var(--bg-primary);
+  transform: translateY(-1px);
 }

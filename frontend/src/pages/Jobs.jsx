@@ -10,7 +10,7 @@ import {
 import { Button } from "../components/ui/Button";
 import { Input } from "../components/ui/Input";
 import JobCard from "../components/jobs/JobCard";
-import { fetchJobs } from "../services/jobService";
+import { fetchRealJobs } from "../services/jobApi";
 import {
   Search,
   Filter,
@@ -52,7 +52,18 @@ const Jobs = () => {
   useEffect(() => {
     const getJobs = async () => {
       try {
-        const data = await fetchJobs();
+        // Fetch real jobs with filters
+        const filters = {
+          count: 50,
+          search: searchTerm,
+          location: locationFilter,
+          type:
+            employmentType && employmentType !== "All"
+              ? employmentType.toLowerCase()
+              : null,
+        };
+
+        const data = await fetchRealJobs(filters);
         setJobs(data);
         setFilteredJobs(data);
       } catch (error) {
@@ -228,7 +239,7 @@ const Jobs = () => {
                 <SlidersHorizontal className="w-4 h-4" />
                 <span>Filters</span>
                 {activeFiltersCount > 0 && (
-                  <span className="absolute -top-2 -right-2 w-5 h-5 bg-blue-600 text-white text-xs rounded-full flex items-center justify-center">
+                  <span className="absolute -top-2 -right-2 w-5 h-5 bg-gray-600 text-white text-xs rounded-full flex items-center justify-center">
                     {activeFiltersCount}
                   </span>
                 )}
@@ -254,7 +265,7 @@ const Jobs = () => {
                       <select
                         value={employmentType}
                         onChange={(e) => setEmploymentType(e.target.value)}
-                        className="w-full p-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full p-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-gray-500"
                       >
                         {employmentTypes.map((type) => (
                           <option key={type} value={type === "All" ? "" : type}>
@@ -272,7 +283,7 @@ const Jobs = () => {
                       <select
                         value={salaryRange}
                         onChange={(e) => setSalaryRange(e.target.value)}
-                        className="w-full p-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full p-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-gray-500"
                       >
                         {salaryRanges.map((range) => (
                           <option
@@ -292,7 +303,7 @@ const Jobs = () => {
                         id="remote"
                         checked={remoteOnly}
                         onChange={(e) => setRemoteOnly(e.target.checked)}
-                        className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
+                        className="w-4 h-4 text-gray-600 bg-gray-100 border-gray-300 rounded focus:ring-gray-500"
                       />
                       <label
                         htmlFor="remote"
@@ -337,7 +348,7 @@ const Jobs = () => {
               <span className="text-sm text-gray-500 dark:text-gray-400">
                 Sort by:
               </span>
-              <select className="p-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+              <select className="p-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-gray-500">
                 <option>Most Recent</option>
                 <option>Salary: High to Low</option>
                 <option>Salary: Low to High</option>
@@ -353,7 +364,7 @@ const Jobs = () => {
             <motion.div
               animate={{ rotate: 360 }}
               transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-              className="w-8 h-8 border-2 border-blue-600 border-t-transparent rounded-full"
+              className="w-8 h-8 border-2 border-gray-600 border-t-transparent rounded-full"
             />
           </div>
         ) : (
