@@ -456,6 +456,8 @@ class AuthenticationTester:
         except requests.exceptions.RequestException as e:
             self.log_test(test_name, False, f"Network error during role access test: {str(e)}")
             return False
+            
+    def test_bcrypt_compatibility(self):
         """Test bcrypt password hashing compatibility"""
         test_name = "Bcrypt Compatibility Test"
         
